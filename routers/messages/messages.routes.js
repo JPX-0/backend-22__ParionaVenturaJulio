@@ -13,7 +13,7 @@ const router = express.Router();
 // Routes
 router.get('/', getMessagesController);
 router.get('/:id', getMessageByIdController);
-router.post('/', saveMessageController);
+router.post('/', saveMessageController); // ???
 router.put('/:id', updateMessageController);
 router.delete('/:id', deleteMessageController);
 
