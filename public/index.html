@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tarea de la clase de Backend N°22</title>
   <link rel="stylesheet" href="./index.css">
-  <script src="https://cdn.jsdelivr.net/npm/normalizr@3.6.1/dist/normalizr.browser.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/normalizr@3.6.1/dist/normalizr.browser.min.js" defer></script>
   <script src="/socket.io/socket.io.js" defer></script>
   <script src="./index.js" defer></script>
   <script src="./webSocket.js" defer></script>
@@ -20,9 +20,10 @@
       <h3 class="main__text">(Compresión: <span id="compression"></span>)</h3>
       <section class="chat">
         <section class="chat__top">
+          <input type="email" name="email" id="email" class="chat__box chat__box--user" placeholder="email">
           <input type="text" name="name" id="name" class="chat__box chat__box--user" placeholder="name">
           <input type="text" name="lastname" id="lastname" class="chat__box chat__box--user" placeholder="lastname">
-          <input type="text" name="age" id="age" class="chat__box chat__box--user" placeholder="age">
+          <input type="number" name="age" id="age" class="chat__box chat__box--user" placeholder="age">
           <input type="text" name="avatar" id="avatar" class="chat__box chat__box--user" placeholder="avatar">
           <input type="text" name="alias" id="alias" class="chat__box chat__box--user" placeholder="alias">
           <button class="chat__btn chat__btn--save disabled" id="changeUserName" disabled></button>

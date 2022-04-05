@@ -1,19 +1,18 @@
 const moment = require('moment');
 
-const formatMessage = (userId, user, text) => {
+const formatMessage = (user, text) => {
   return {
     author: {
-      id: userId,
       ...user
     },
     time: `[${moment().format('L')} ${moment().format('LTS')}]`,
     text
   }
 };
-const messageBot = (text, name) => {
+const messageBot = (text, id) => {
   return {
     bot: "_bot_",
-    author: { name },
+    author: { id },
     text
   }
 };

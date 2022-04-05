@@ -1,5 +1,6 @@
 // ASK FOR CHAT
 const windowChat = document.querySelector(`.chat__container`);
+const userEmail = document.querySelector(`#email`);
 const userName = document.querySelector(`#name`);
 const userLastame = document.querySelector(`#lastname`);
 const userAge = document.querySelector(`#age`);
@@ -9,7 +10,7 @@ const changeName = document.querySelector(`#changeUserName`);
 const submitChat = document.querySelector(`#messageButton`);
 const inputChat = document.querySelector(`#messageInput`);
 const messageBox = [submitChat, inputChat];
-const dataUser = [userName, userLastame, userAge, userAvatar, userAlias];
+const dataUser = [userEmail, userName, userLastame, userAge, userAvatar, userAlias];
 
 // GENERAL FUNCTIONS
 const validate = e => e.value.length < 3;
@@ -20,18 +21,18 @@ const renderMessage = (data) => {
   let html;
   if (!data.bot) {
     div.classList.add(`userMessage`);
-    if (data.author.name === userName.value) {
+    if (data.author.id === userEmail.value) {
       div.classList.add(`myUser`);
     } else {
       div.classList.add(`anotherUser`);
     }
     html = `
-      <p><span class="bot__user">${data.author.name}</span> <span class="bot__time">${data.time}</span></p>
+      <p><span class="bot__user">${data.author.id}</span> <span class="bot__time">${data.time}</span></p>
       <p>${data.text}</p>
     `;
   } else {
     div.classList.add(`bot`);
-    html = `<p>${data.text} <span class="bot__user">${data.author.name}</span></p>`;
+    html = `<p>${data.text} <span class="bot__user">${data.author.id}</span></p>`;
   }
   div.innerHTML = html;
   document.getElementById(`renderMessages`).appendChild(div);
@@ -46,7 +47,7 @@ const renderWriting = (data, renderOnOff) => {
   if(renderOnOff) {
     html= `
       <div class="bot">
-        <p><span class="bot__user">${data.author.name}</span> ${data.text} <span class="bot__writing"></span></p>
+        <p><span class="bot__user">${data.author.id}</span> ${data.text} <span class="bot__writing"></span></p>
       </div>
     `;
   } else {
