@@ -25,10 +25,6 @@ class FirebaseContainer {
     const docRef = await this.query.get();
     const documents = docRef.docs;
     return documents.map(document => document.data());
-    // return documents.map(document => ({ 
-    //   id: document.id,
-    //   ...document.data()
-    // }))
   }
 
   async getById(id) {

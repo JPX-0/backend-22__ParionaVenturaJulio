@@ -63,7 +63,7 @@ let count = 0;
 
 // CHAT EVENTS
 window.addEventListener(`keyup`, () => {
-  if(validate(userName) || validate(userLastame) || validate(userAge) || validate(userAvatar) || validate(userAlias)){
+  if(validate(userName) || validate(userLastame) || userAge.value.length == 0 || validate(userAvatar) || validate(userAlias)){
     changeName.classList.add(`disabled`);
     changeName.setAttribute(`disabled`, `true`);
   } else {

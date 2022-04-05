@@ -1,22 +1,16 @@
-const { ENV: { PERS } } = require('../../config');
+const { ENV: { PERS } } = require('../../utils/config');
 
-let ProductsDao;
+let MessagesDao;
 
 switch(PERS) {
   case 'firebase':
-    ProductsDao = require('./menssages/FirebaseMessagesDao');
+    MessagesDao = require('./messages/FirebaseMessagesDao');
     // CartsDao = require('./carts/FirebaseCartsDao');
-    break;
-  case 'mongo':
-    // ProductsDao = require('./menssages/MongoProductsDao');
-    // CartsDao = require('./carts/MongoCartsDao');
-    break;
-  case 'file':
     break;
   default:
     throw new Error('Invalid persistent method');
 }
 
 module.exports = {
-  ProductsDao
+  MessagesDao
 }

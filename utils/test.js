@@ -10,6 +10,4 @@ const createProductItem = () => {
   }
 };
 
-module.exports = {
-  createProductItem
-}
+module.exports = { createProductItem };

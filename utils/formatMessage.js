@@ -2,9 +2,7 @@ const moment = require('moment');
 
 const formatMessage = (user, text) => {
   return {
-    author: {
-      ...user
-    },
+    author: { ...user },
     time: `[${moment().format('L')} ${moment().format('LTS')}]`,
     text
   }

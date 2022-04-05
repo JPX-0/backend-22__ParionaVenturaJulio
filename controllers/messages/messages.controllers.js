@@ -1,10 +1,10 @@
-const FirebaseMessagesDao = require('../../models/daos/menssages/FirebaseMessagesDao');
+const { MessagesDao } = require('../../models/daos');
 
-const MessagesApi = new FirebaseMessagesDao();
+const messagesApi = new MessagesDao();
 
 const getMessagesController = async (req, res, next) => {
   try {
-    res.status(200).json({ success: true, result: await MessagesApi.getAll() });
+    res.status(200).json({ success: true, result: await messagesApi.getAll() });
   }
   catch(error) {
     next(error.message);
@@ -14,8 +14,7 @@ const getMessagesController = async (req, res, next) => {
 const getMessageByIdController = async (req, res, next) => {
   try {
     const { id } = req.params;
-    if(id && isNaN(+id)) return res.status(400).json({ success: false, error: `The ID must be a valid number` });
-    const productsResponse = await productsApi.getById(id); 
+    const productsResponse = await messagesApi.getById(id); 
     res.status(200).json({ success: true, result: productsResponse });
   }
   catch(error) {
@@ -26,7 +25,7 @@ const getMessageByIdController = async (req, res, next) => {
 const saveMessageController = (req, res, next) => {
   try {
     const MessageItem = req.body;
-    res.json(MessagesApi.save(MessageItem))
+    res.json(messagesApi.save(MessageItem));
   }
   catch(error) {
     next(error.message);
@@ -37,7 +36,7 @@ const updateMessageController = (req, res, next) => {
   try {
     const { id } = req.params;
     const MessageItem = req.body;
-    res.json(MessagesApi.update(id, MessageItem));
+    res.json(messagesApi.update(id, MessageItem));
   }
   catch(error) {
     next(error.message);
@@ -47,7 +46,7 @@ const updateMessageController = (req, res, next) => {
 const deleteMessageController = (req, res, next) => {
   try {
     const { id } = req.params;
-    res.json(MessagesApi.delete(id));
+    res.json(messagesApi.delete(id));
   }
   catch(error) {
     next(error.message);

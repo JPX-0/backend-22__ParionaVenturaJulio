@@ -220,9 +220,6 @@ a {
 .chat__btn--save::after {
   content: "Guardar";
 }
-.chat__btn--change::after {
-  content: "Cambiar";
-}
 .chat__container {
   display        : flex;
   flex-direction : column;

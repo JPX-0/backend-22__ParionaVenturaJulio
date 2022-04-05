@@ -17,15 +17,11 @@ exports.connection = io => {
     socket.on(`join-chat`, async ({ id }) => {
       const chats = await firebaseApi.getAll();
       const dataMessages = { id: "messages", messages: chats };
-
-      // Definimos un esquema para la entiad empleado.
+      
       const user = new schema.Entity("user");
-
-      // Definimos un esquema para la entiad empresa.
       const article = new schema.Entity("article", {
         author: user
       });
-      
       const post = new schema.Entity("message", {
         messages: [article]
       });

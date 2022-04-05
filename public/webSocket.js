@@ -3,6 +3,7 @@ const socket = io.connect();
 // CHAT EVENTS
 window.addEventListener(`click`, () => {
   if(data_is_valid && !count) {
+    // join-chat - envía el email del usuario que acaba de ingresar.
     socket.emit(`join-chat`, { id: userEmail.value });
     count++;
   }
@@ -51,7 +52,6 @@ socket.on(`get-messages`, (result, entities) => {
 });
 
 socket.on(`chat-message`, data => {
-  // let userActual = JSON.parse(localStorage.getItem(`user`));
   renderMessage(data);
   setTimeout(() => {
     windowChat.scrollTop = windowChat.scrollHeight;
