@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tarea de la clase de Backend N°22</title>
+  <link rel="stylesheet" href="./index.css">
+  <script src="https://cdn.jsdelivr.net/npm/normalizr@3.6.1/dist/normalizr.browser.min.js"></script>
+  <script src="/socket.io/socket.io.js" defer></script>
+  <script src="./index.js" defer></script>
+  <script src="./webSocket.js" defer></script>
+</head>
+<body>
+  <header>Tarea de la clase 22 de Backend</header>
+
+  <main>
+    <section class="main">
+      <h2 class="main__title">Centro de Mensajes</h2>
+      <h3 class="main__text">(Compresión: <span id="compression"></span>)</h3>
+      <section class="chat">
+        <section class="chat__top">
+          <input type="text" name="name" id="name" class="chat__box chat__box--user" placeholder="name">
+          <input type="text" name="lastname" id="lastname" class="chat__box chat__box--user" placeholder="lastname">
+          <input type="text" name="age" id="age" class="chat__box chat__box--user" placeholder="age">
+          <input type="text" name="avatar" id="avatar" class="chat__box chat__box--user" placeholder="avatar">
+          <input type="text" name="alias" id="alias" class="chat__box chat__box--user" placeholder="alias">
+          <button class="chat__btn chat__btn--save disabled" id="changeUserName" disabled></button>
+        </section>
+        <section class="chat__middle">
+          <section class="chat__container" id="renderMessages">
+
+          </section>
+          <section class="chat__container" id="renderNotification">
+
+          </section>
+        </section>
+        <section id="messageBox" class="chat__bottom">
+          <input name="messageInput" id="messageInput" class="chat__box disabled" placeholder="Escribe un mensaje..." disabled>
+          <button class="chat__btn disabled" id="messageButton" disabled>Enviar</button>
+        </section>
+      </section>
+    </section>
+  </main>
+
+  <footer>© Julio Cesar Pariona Ventura 😎</footer>
+</body>
+</html>
