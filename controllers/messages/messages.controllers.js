@@ -3,6 +3,12 @@ const moment = require('moment');
 
 const messagesApi = new MessagesDao();
 
+const validate = (value, num) => {
+  if(!value) return true;
+  if(value == "") return true;
+  if(value.length < num) return true;
+}
+
 const getMessagesController = async (req, res, next) => {
   try {
     res.status(200).json({ success: true, result: await messagesApi.getAll() });
@@ -15,7 +21,8 @@ const getMessagesController = async (req, res, next) => {
 const getMessageByIdController = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const productsResponse = await messagesApi.getById(id); 
+    const productsResponse = await messagesApi.getById(id);
+    if(!productsResponse) return res.status(404).json({ success: false, error: "ID not Found" });
     res.status(200).json({ success: true, result: productsResponse });
   }
   catch(error) {
@@ -26,34 +33,42 @@ const getMessageByIdController = async (req, res, next) => {
 const saveMessageController = async (req, res, next) => {
   try {
     const { id, name, lastname, age, avatar, alias, text } = req.body;
-    if(id.length < 3 || name.length < 3 || lastname.length < 3 || age.length < 1 || avatar.length < 3 || alias.length < 3 || text.length < 1) return res.status(400).json({ success: false, error: `Wrong body format` });
+    if(validate(id, 3) || validate(name, 3) || validate(lastname, 3) || validate(age, 1) || validate(avatar, 3) || validate(alias, 3) || validate(text, 1)) return res.status(400).json({ success: false, error: `Wrong body format` });
     const messageItem = {
       author: { id, name, lastname, age, avatar, alias },
       time: `[${moment().format('L')} ${moment().format('LTS')}]`,
       text
     }
-    res.status(200).json(await messagesApi.save(messageItem));
+    await messagesApi.save(messageItem);
+    res.status(200).json({ success: true, result: `Message correctly stored` });
   }
   catch(error) {
     next(error.message);
   }
 }
 
-const updateMessageController = (req, res, next) => {
+const updateMessageController = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const messageItem = req.body;
-    res.json(messagesApi.update(id, messageItem));
+    const productsResponse = await messagesApi.getById(id);
+    if(!productsResponse) return res.status(404).json({ success: false, error: "ID not Found" });
+    const { text } = req.body;
+    if(validate(text, 1)) return res.status(400).json({ success: false, error: `Wrong body format` });
+    await messagesApi.update(id, { text });
+    res.status(200).json({ success: true, result: `Message updated successfully` });
   }
   catch(error) {
     next(error.message);
   }
 }
 
-const deleteMessageController = (req, res, next) => {
+const deleteMessageController = async (req, res, next) => {
   try {
     const { id } = req.params;
-    res.json(messagesApi.delete(id));
+    const productsResponse = await messagesApi.getById(id);
+    if(!productsResponse) return res.status(404).json({ success: false, error: "ID not Found" });
+    await messagesApi.deleteById(id);
+    res.status(200).json({ success: true, result: `Message correctly eliminated` });
   }
   catch(error) {
     next(error.message);
